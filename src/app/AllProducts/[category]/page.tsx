@@ -1,5 +1,12 @@
 import Image from "next/image";
 import { data } from "../../Components/types";
+import Link from "next/link";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Cateogory wise Product",
+  description: "display Cateogory wise Product ",
+};
 
 export async function generateStaticParams() {
   const res = await fetch(`https://fakestoreapi.com/products/categories`);
@@ -31,12 +38,14 @@ export default async function GiveProductDetail(props: any) {
         {products.map((ele: data) => (
           <div key={ele.id} className="mt-10  ">
             <div className="mt-3">
-              <Image
-                src={`${ele.image}`}
-                alt={ele.title}
-                width={300}
-                height={400}
-              />
+              <Link href={`../product/${ele.id}`}>
+                <Image
+                  src={`${ele.image}`}
+                  alt={ele.title}
+                  width={300}
+                  height={400}
+                />
+              </Link>
             </div>
           </div>
         ))}
