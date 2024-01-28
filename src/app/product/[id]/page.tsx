@@ -1,11 +1,28 @@
 import Image from "next/image";
 import type { Metadata } from "next";
-import { data } from "@/app/Components/types";
 
 export const metadata: Metadata = {
   title: "product",
   description: "display single product ",
 };
+interface id {
+  id: string; // Assuming id is of type string, adjust it accordingly
+  // Other properties as needed
+}
+
+export async function generateStaticParams() {
+  const res = await fetch(`https://fakestoreapi.com/products`);
+  const products: id[] = await res.json();
+
+  const productIds: string[] = products.map((product) => product.id);
+  console.log(productIds);
+
+  return productIds.map((id) => ({
+    params: {
+      id: id,
+    },
+  }));
+}
 
 async function getData(id: number) {
   const res = await fetch(`https://fakestoreapi.com/products/${id}`);
