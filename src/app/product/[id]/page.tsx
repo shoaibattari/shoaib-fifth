@@ -15,7 +15,7 @@ export async function generateStaticParams() {
   const products: id[] = await res.json();
 
   const productIds: string[] = products.map((product) => product.id);
-  console.log(productIds);
+  // console.log(productIds);
 
   return productIds.map((id) => ({
     params: {
@@ -38,9 +38,9 @@ export default async function GiveProductDetail(props: any) {
   const product = await getData(props.params.id);
 
   return (
-    <div className="bg-gray-900 py-24 mx-20 my-20">
-      <div className="mx-auto mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl  lg:gap-x-8 lg:px-8">
-        <div className="grid md:grid-cols-2 ">
+    <div className="bg-gray-900 p-6 md:py-24 md:mx-20 md:my-20">
+      <div className="mx-auto mt-6 max-w-2xl sm:px-6 lg:max-w-7xl  lg:gap-x-8 lg:px-8">
+        <div className="grid grid-cols-1  md:grid-cols-2 ">
           <div>
             <h1 className="text-2xl font-bold tracking-tight text-gray-200 sm:text-5xl uppercase">
               {product.title}
@@ -63,7 +63,7 @@ export default async function GiveProductDetail(props: any) {
               alt={product.title}
               width={250}
               height={200}
-              className="mx-12"
+              className="md:mx-12 m-20"
             ></Image>
           </div>
         </div>
